@@ -19,11 +19,8 @@ public class Case implements Constantes{
 		this.maxX = minX + 100;
 		this.maxY = minY + 100;
 		this.statut = unChecked;
-	}
-	
-	//Retoune si la case est coché ou non
-	public void init(){
 		imageJoueur = new ImageIcon("img/player1.png").getImage(); 
+
 	}
 	
 	public Image getImage(){

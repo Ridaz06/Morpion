@@ -13,22 +13,31 @@ public class Jeu implements Constantes{
 	private Image img = null;
 	private Toolkit toolkit = null;
 	private int round;
+	private int counterRound = 0;
+	private Ia ia = new IaHard();
 	public Jeu(){
 		round = playerOne;
 		toolkit = Toolkit.getDefaultToolkit();
 		img = new ImageIcon("img/case.png").getImage();
 		for (int i = 0; i < nbCasesLigne; i++)
-			for(int j = 0; j < nbCasesColonne; j++){
+			for(int j = 0; j < nbCasesColonne; j++)
 				tabJeu[i][j] = new Case(5 + i*100, 5 + j*100); 
-				tabJeu[i][j].init();
-			}
+		iaCalcul();
 	}
 	
+	//Se déclanche lors d'un clique de souri
 	public void click(int x, int y){
 		System.out.println("Click at x: " + x +" y: " + y );
 		calculJoueur(x, y);
 					
 	}
+	
+	//Tour de l'ia
+	private void iaCalcul(){
+		ia.play(counterRound, tabJeu);
+	}
+	
+	//Coche une case si c'est possible
 	private void calculJoueur(int x, int y){
 		for (int i = 0; i < nbCasesLigne; i++)
 			for (int j = 0; j < nbCasesColonne; j++)
@@ -36,15 +45,18 @@ public class Jeu implements Constantes{
 					System.out.println("Click in the case " + i + " | " + j);
 					if (!tabJeu[i][j].isChecked()){
 						System.out.println("Case " + i + " | " + j + " checked by player " + (round+1));
-						tabJeu[i][j].setChecked(round);
+						tabJeu[i][j].setChecked(0);
 						/*Si round vaut 0 alors il prend la valeur 1
 						 * sinon il prend la valeur 0
 						 */
+						counterRound++;
 						round = (round == playerOne) ? playerTwo : playerOne; 
+						ia.play(counterRound, tabJeu);
 					}
 				}		
 	}
 	
+	//Verifie si la partie est terminé
 	public int isWon(){
 		//Retourne 0 ou 1 si la partie est gagné par le joueur 1 ou 2
 		//Ligne 1
@@ -73,9 +85,7 @@ public class Jeu implements Constantes{
 			return tabJeu[0][2].getPlayers();
 	return -1; //Retourne -1 si la partie continue
 	}
-	private void iaCalcul(){
-		
-	}
+
 	public void affichage(Graphics g) {
 		for(int i = 0; i < nbCasesLigne; i++)
 			for(int j = 0; j < nbCasesColonne; j++){
