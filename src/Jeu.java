@@ -1,6 +1,10 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 
@@ -37,16 +41,37 @@ public class Jeu implements Constantes{
 						 * sinon il prend la valeur 0
 						 */
 						round = (round == playerOne) ? playerTwo : playerOne; 
-
 					}
-				}
-		isWon();
-		
+				}		
 	}
 	
-	private boolean isWon(){
-		tabJeu[0][0].egals(tabJeu[1][0]);
-		return true;
+	public int isWon(){
+		//Retourne 0 ou 1 si la partie est gagné par le joueur 1 ou 2
+		//Ligne 1
+		if (tabJeu[0][0].egals(tabJeu[1][0]) && tabJeu[0][0].egals(tabJeu[2][0]))
+			return tabJeu[0][0].getPlayers();
+		//Ligne 2
+		if (tabJeu[0][1].egals(tabJeu[1][1]) && tabJeu[0][1].egals(tabJeu[2][1]))
+			return tabJeu[0][1].getPlayers();
+		//Ligne 3
+		if (tabJeu[0][2].egals(tabJeu[1][2]) && tabJeu[0][2].egals(tabJeu[2][2]))
+			return tabJeu[0][2].getPlayers();
+		//Colonne 1
+		if (tabJeu[0][0].egals(tabJeu[0][1]) && tabJeu[0][0].egals(tabJeu[0][2]))
+			return tabJeu[0][0].getPlayers();
+		//Colonne 2
+		if (tabJeu[1][0].egals(tabJeu[1][1]) && tabJeu[1][0].egals(tabJeu[1][2]))
+			return tabJeu[1][0].getPlayers();
+		//Colonne 3
+		if (tabJeu[2][0].egals(tabJeu[2][1]) && tabJeu[2][0].egals(tabJeu[2][2]))
+			return tabJeu[2][0].getPlayers();
+		//Diagonale 1
+		if (tabJeu[0][0].egals(tabJeu[1][1]) && tabJeu[0][0].egals(tabJeu[2][2]))
+			return tabJeu[0][0].getPlayers();
+		//Diagonale 2
+		if (tabJeu[0][2].egals(tabJeu[1][1]) && tabJeu[0][2].egals(tabJeu[2][0]))
+			return tabJeu[0][2].getPlayers();
+	return -1; //Retourne -1 si la partie continue
 	}
 	private void iaCalcul(){
 		
@@ -58,5 +83,19 @@ public class Jeu implements Constantes{
 				if (tabJeu[i][j].isChecked())
 					g.drawImage(tabJeu[i][j].getImage(), 5 + i*100, 5 + j*100, null);
 			}
+		if (this.isWon() != -1){
+			String text = "Joueur " + (this.isWon() + 1) + " gagne ";
+			
+			AffineTransform affinetransform = new AffineTransform(); 
+			//Calcul de la longueur et de la hauteur du string
+			FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
+			Font font = new Font("Tahoma", Font.PLAIN, 30);
+			int textwidth = (int)(font.getStringBounds(text, frc).getWidth());
+			int textheight = (int)(font.getStringBounds(text, frc).getHeight());
+			g.setColor(Color.red);
+			g.setFont(font);
+			
+			g.drawString(text, 315 / 2 - textwidth / 2, 337 / 2 - textheight / 2);
+		}
 	}
 }

@@ -60,5 +60,6 @@ public class MainWindow extends JFrame implements Constantes{
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
 	}
 }

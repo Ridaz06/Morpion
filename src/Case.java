@@ -54,9 +54,7 @@ public class Case implements Constantes{
 		return this.playerChecked;
 	}
 	public boolean egals(Case c){
-		if (c.isChecked() && this.isChecked() && (c.getPlayers() == this.playerChecked));
-			System.out.println("Cases identique");
-		return true;
+		return c.isChecked() && this.isChecked() && (this.playerChecked == c.playerChecked);
 	}
 	//Liste de fonctions qui donnent et affectent les positons
 	public int getX(){
