@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +11,7 @@ public class MainWindow extends JFrame implements Constantes{
 	public MainWindow(){
 		System.out.println("Create window");
 		this.setVisible(true);
-		this.setSize(40 + nbCasesLigne * wCase, 40 + nbCasesColonne * hCase);
+		this.setPreferredSize(new Dimension(315,337));
 		this.setTitle("Morpion");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -57,5 +58,6 @@ public class MainWindow extends JFrame implements Constantes{
 			
 		});
 		this.setContentPane(mainPanel);
+		this.pack();
 	}
 }
