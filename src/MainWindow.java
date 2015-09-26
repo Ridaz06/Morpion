@@ -10,7 +10,7 @@ public class MainWindow extends JFrame implements Constantes{
 	public MainWindow(){
 		System.out.println("Create window");
 		this.setVisible(true);
-		this.setSize(20 + nbCasesLigne * wCase, 40 + nbCasesColonne * hCase);
+		this.setSize(40 + nbCasesLigne * wCase, 40 + nbCasesColonne * hCase);
 		this.setTitle("Morpion");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -9,8 +9,10 @@ public class Jeu implements Constantes{
 	private Case[][] tabJeu = new Case [nbCasesLigne][nbCasesColonne];
 	public Jeu(){
 		for (int i = 0; i < nbCasesLigne; i++)
-			for(int j = 0; j < nbCasesColonne; j++)
+			for(int j = 0; j < nbCasesColonne; j++){
 				tabJeu[i][j] = new Case(10 + i*100, 10 + j*100); 
+				tabJeu[i][j].init();
+			}
 	}
 	
 	public void click(int x, int y){
@@ -34,8 +36,8 @@ public class Jeu implements Constantes{
 		for(int i = 0; i < nbCasesLigne; i++)
 			for(int j = 0; j < nbCasesColonne; j++){
 				g.drawImage(img, 10 + i*100, 10 + j*100, null);
-			//	if (tabJeu[i][j].isChecked())
-				//	g.drawImage(tabJeu[i][j].getImage(), 10 + i*100, 10 + j*100, null);
+				if (tabJeu[i][j].isChecked())
+					g.drawImage(tabJeu[i][j].getImage(), 10 + i*100, 10 + j*100, null);
 			}
 	}
 }
