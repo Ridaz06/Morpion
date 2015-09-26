@@ -27,7 +27,9 @@ public class MainWindow extends JFrame implements Constantes{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				jeu.click(arg0.getX(), arg0.getY());
+				//Si la partie n'est pas terminé
+				if (jeu.isWon() == -1)
+					jeu.click(arg0.getX(), arg0.getY());
 				MainWindow.this.mainPanel.repaint();
 			}
 
@@ -56,6 +58,27 @@ public class MainWindow extends JFrame implements Constantes{
 			}
 			
 		});
+		
+		Thread t = new Thread(new Runnable(){
+			//Verifie si la partie est terminé et quitte si c'est le cas
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				while (true){
+					if (MainWindow.this.jeu.isWon() != -1){
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.exit(0);
+					}
+				}
+			}
+			
+		});
+		t.start();
 		this.setContentPane(mainPanel);
 		this.pack();
 		this.setLocationRelativeTo(null);
