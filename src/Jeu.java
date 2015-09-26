@@ -8,7 +8,9 @@ public class Jeu implements Constantes{
 	private Case[][] tabJeu = new Case [nbCasesLigne][nbCasesColonne];
 	private Image img = null;
 	private Toolkit toolkit = null;
+	private int round;
 	public Jeu(){
+		round = playerOne;
 		toolkit = Toolkit.getDefaultToolkit();
 		img = new ImageIcon("img/case.png").getImage();
 		for (int i = 0; i < nbCasesLigne; i++)
@@ -27,12 +29,25 @@ public class Jeu implements Constantes{
 		for (int i = 0; i < nbCasesLigne; i++)
 			for (int j = 0; j < nbCasesColonne; j++)
 				if (tabJeu[i][j].isClickIn(x, y)){
-					System.out.println("Click dans la case " + i + " | " + j);
-					if (!tabJeu[i][j].isChecked())
-						tabJeu[i][j].setChecked(1);
+					System.out.println("Click in the case " + i + " | " + j);
+					if (!tabJeu[i][j].isChecked()){
+						System.out.println("Case " + i + " | " + j + " checked by player " + (round+1));
+						tabJeu[i][j].setChecked(round);
+						/*Si round vaut 0 alors il prend la valeur 1
+						 * sinon il prend la valeur 0
+						 */
+						round = (round == playerOne) ? playerTwo : playerOne; 
+
+					}
 				}
+		isWon();
+		
 	}
 	
+	private boolean isWon(){
+		tabJeu[0][0].egals(tabJeu[1][0]);
+		return true;
+	}
 	private void iaCalcul(){
 		
 	}

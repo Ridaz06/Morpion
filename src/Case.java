@@ -27,7 +27,6 @@ public class Case implements Constantes{
 	}
 	
 	public Image getImage(){
-		System.out.println("Retourne image");
 		return this.imageJoueur;
 	}
 	
@@ -42,7 +41,7 @@ public class Case implements Constantes{
 	}
 	//Coche la case et donne le joueur qui la coché
 	public void setChecked(int player){
-		this.statut = true;
+		this.statut = checked;
 		this.playerChecked = player;
 		
 		if (player == playerOne)
@@ -51,6 +50,14 @@ public class Case implements Constantes{
 			this.imageJoueur = new ImageIcon("img/player2.png").getImage();
 	}
 	
+	public int getPlayers(){
+		return this.playerChecked;
+	}
+	public boolean egals(Case c){
+		if (c.isChecked() && this.isChecked() && (c.getPlayers() == this.playerChecked));
+			System.out.println("Cases identique");
+		return true;
+	}
 	//Liste de fonctions qui donnent et affectent les positons
 	public int getX(){
 		return this.minX;

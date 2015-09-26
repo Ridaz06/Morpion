@@ -10,7 +10,6 @@ public class MainWindow extends JFrame implements Constantes{
 	private Jeu jeu = null;
 	public MainWindow(){
 		System.out.println("Create window");
-		this.setVisible(true);
 		this.setPreferredSize(new Dimension(315,337));
 		this.setTitle("Morpion");
 		this.setResizable(false);
@@ -59,5 +58,7 @@ public class MainWindow extends JFrame implements Constantes{
 		});
 		this.setContentPane(mainPanel);
 		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 }
