@@ -14,7 +14,7 @@ public class Jeu implements Constantes{
 	private Toolkit toolkit = null;
 	private int round;
 	private int counterRound = 0;
-	private Ia ia = new IaHard();
+	private Ia ia = new IaEasy();
 	public Jeu(){
 		round = playerOne;
 		toolkit = Toolkit.getDefaultToolkit();
@@ -46,12 +46,10 @@ public class Jeu implements Constantes{
 					if (!tabJeu[i][j].isChecked()){
 						System.out.println("Case " + i + " | " + j + " checked by player " + (round+1));
 						tabJeu[i][j].setChecked(0);
-						/*Si round vaut 0 alors il prend la valeur 1
-						 * sinon il prend la valeur 0
-						 */
 						counterRound++;
-						round = (round == playerOne) ? playerTwo : playerOne; 
-						ia.play(counterRound, tabJeu);
+						System.out.println("Tour : " + counterRound);
+						if (this.isWon() == -1)
+							ia.play(counterRound, tabJeu);
 					}
 				}		
 	}
