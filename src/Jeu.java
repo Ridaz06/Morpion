@@ -14,7 +14,7 @@ public class Jeu implements Constantes{
 	private Toolkit toolkit = null;
 	private int round;
 	private int counterRound = 0;
-	private Ia ia = new IaEasy();
+	private Ia ia = new IaHard();
 	public Jeu(){
 		round = playerOne;
 		toolkit = Toolkit.getDefaultToolkit();
